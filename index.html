@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>abc</p>
-</body>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>經緯度轉換</title>
+
+    <style>
+      * {
+        text-align: center;
+      }
+    </style>
+
+    <script>
+      const search = () => {
+        let array = document
+          .getElementById("coordinate")
+          .value.replace(/\s+/g, "")
+          .split(",");
+        if ((array[0], array[1])) {
+          document.getElementById("longitude").innerText = `經度：${array[0]}`;
+          document.getElementById("latitude").innerText = `緯度：${array[1]}`;
+          document.getElementById("link").innerText = "打開 Google Map";
+          document.getElementById(
+            "link"
+          ).href = `https://www.google.com.tw/maps?q=${array[1]},${array[0]}`;
+        } else {
+          document.getElementById("link").innerText = "";
+          document.getElementById("longitude").innerText = "經度：";
+          document.getElementById("latitude").innerText = "緯度：";
+        }
+      };
+
+      const clean = () => {
+        document.getElementById("coordinate").value = "";
+        document.getElementById("link").innerText = "";
+        document.getElementById("longitude").innerText = "經度：";
+        document.getElementById("latitude").innerText = "緯度：";
+      };
+    </script>
+  </head>
+  <body>
+    <h1>國土測繪轉換</h1>
+    <input id="coordinate" type="text" /><br /><br />
+    <button onclick="search()">查詢</button>
+    <button onclick="clean()">清除</button><br /><br />
+    <a id="link" href="" target="_blank"></a>
+    <h3 id="longitude">經度：</h3>
+    <h3 id="latitude">緯度：</h3>
+  </body>
 </html>
