@@ -17,35 +17,41 @@
           .getElementById("coordinate")
           .value.replace(/\s+/g, "")
           .split(",");
+
         if ((array[0], array[1])) {
-          document.getElementById("longitude").innerText = `經度：${array[0]}`;
-          document.getElementById("latitude").innerText = `緯度：${array[1]}`;
-          document.getElementById("link").innerText = "打開 Google Map";
+          document.getElementById("link").innerText = "打開 Google Maps";
+          document.getElementById(
+            "result"
+          ).innerText = `經緯度：${array[1]},${array[0]}`;
           document.getElementById(
             "link"
-          ).href = `https://www.google.com.tw/maps?q=${array[1]},${array[0]}`;
+          ).href = `https://www.google.com/maps?q=${array[1]},${array[0]}`;
+          document.getElementById("copy").style = "";
+          document.getElementById("copy").addEventListener("click", () => {
+            navigator.clipboard.writeText(`${array[1]},${array[0]}`);
+          });
         } else {
           document.getElementById("link").innerText = "";
-          document.getElementById("longitude").innerText = "經度：";
-          document.getElementById("latitude").innerText = "緯度：";
+          document.getElementById("result").innerText = "經緯度：";
+          document.getElementById("copy").style = "display:none";
         }
       };
 
       const clean = () => {
         document.getElementById("coordinate").value = "";
         document.getElementById("link").innerText = "";
-        document.getElementById("longitude").innerText = "經度：";
-        document.getElementById("latitude").innerText = "緯度：";
+        document.getElementById("result").innerText = "經緯度：";
+        document.getElementById("copy").style = "display:none";
       };
     </script>
   </head>
   <body>
-    <h1>國土測繪轉換</h1>
+    <h1>國土測繪轉換用</h1>
     <input id="coordinate" type="text" /><br /><br />
     <button onclick="search()">查詢</button>
     <button onclick="clean()">清除</button><br /><br />
     <a id="link" href="" target="_blank"></a>
-    <h3 id="longitude">經度：</h3>
-    <h3 id="latitude">緯度：</h3>
+    <h3 id="result">經緯度：</h3>
+    <button id="copy" style="display: none">copy</button>
   </body>
 </html>
